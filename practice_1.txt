@@ -5,69 +5,52 @@ C++ BASICS: VARIABLES, I/O, AND ARITHMETIC PRACTICE QUESTIONS
 --- Level 1: Warm-up with cout and cin ---
 
 1. The Greeting Machine
-   - Task: Write a program that asks the user for their first name, 
-     and then prints out a personalized greeting.
+   - Task: Write a program that asks the user for their first name, and then prints out a personalized greeting.
    - Example Input: Alex
    - Example Output: Hello, Alex! Welcome to C++.
 
 2. Full Address Printer
-   - Task: Create three different string variables for City, State, 
-     and ZipCode. Ask the user to input each one, and then print them 
-     out formatted cleanly on a single line separated by commas.
+   - Task: Create three different string variables for City, State, and ZipCode. Ask the user to input each one, and then print them out formatted cleanly on a single line separated by commas.
    - Example Output: You live in: New Delhi, Delhi, 110001
-
 
 --- Level 2: Basic Math with Integers (int) ---
 
 3. Next and Previous
-   - Task: Ask the user to input a single whole number. Calculate and 
-     print the number that comes right before it and the number that 
-     comes right after it.
+   - Task: Ask the user to input a single whole number. Calculate and print the number that comes right before it and the number that comes right after it.
    - Example Input: 5
    - Example Output: Before: 4, After: 6
 
 4. Area of a Rectangle
    - Task: Take two integer inputs from the user: length and width. 
-     Calculate and display the total area of the rectangle.
-     (Formula: Area = length * width)
+     Calculate and display the total area of the rectangle. (Formula: Area = length * width)
 
 5. The Cookie Divider (Modulus Practice)
-   - Task: Ask the user for a total number of cookies and a total 
-     number of friends. Print out how many cookies each friend gets 
-     equally, and how many leftover cookies remain in the box.
+   - Task: Ask the user for a total number of cookies and a total number of friends. Print out how many cookies each friend gets equally, and how many leftover cookies remain in the box.
      (Hint: Use / and %)
    - Example Input: 13 cookies, 4 friends.
    - Example Output: Each friend gets 3 cookies. Leftover cookies: 1
 
-
 --- Level 3: Working with Decimals (float / double) ---
 
 6. Currency Converter
-   - Task: Ask the user for an amount in USD (decimal value) and print 
-     out the equivalent amount in EUR. Assume 1 USD = 0.92 EUR.
+   - Task: Ask the user for an amount in USD (decimal value) and print out the equivalent amount in EUR. Assume 1 USD = 0.92 EUR.
    - Example Input: 10.50
    - Example Output: 10.50 USD is equal to 9.66 EUR.
 
 7. The Average Finder
-   - Task: Ask the user to input 3 decimal numbers. Calculate their 
-     mathematical average and display the result.
+   - Task: Ask the user to input 3 decimal numbers. Calculate their mathematical average and display the result.
      (Formula: Average = (num1 + num2 + num3) / 3.0)
-
 
 --- Level 4: Characters and Types (char / bool) ---
 
 8. ASCII Value Finder
-   - Task: Ask the user to input a single letter or character (char). 
-     Then, force C++ to print out its underlying numeric ASCII value.
+   - Task: Ask the user to input a single letter or character (char). Then, force C++ to print out its underlying numeric ASCII value.
      (Hint: You can store a char inside an int variable to see its value)
    - Example Input: A
    - Example Output: The ASCII value of A is 65.
 
 9. Smart Inverter
-   - Task: Ask the user to enter 1 (for true) or 0 (for false) to 
-     initialize a bool variable. Print out the opposite value of what 
-     they entered using the NOT (!) operator.
-
+   - Task: Ask the user to enter 1 (for true) or 0 (for false) to initialize a bool variable. Print out the opposite value of what they entered using the NOT (!) operator.
 
 --- Level 5: Putting It All Together ---
 
