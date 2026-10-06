@@ -1,0 +1,492 @@
+# C++ Basics Tutorial: Variables, Data Types and Strings
+
+A hands-on introduction for graduate students new to C++. Every code block is a complete, compilable program.
+
+**How to compile and run** (g++ or clang++):
+
+```bash
+g++ -std=c++17 -Wall -Wextra main.cpp -o main
+./main
+```
+
+## Table of Contents
+
+1. [Variables in C++](#1-variables-in-c)
+2. [Data Types in C++](#2-data-types-in-c)
+3. [Working with Strings](#3-working-with-strings)
+4. [Practice Exercises](#4-practice-exercises)
+
+---
+
+## 1. Variables in C++
+
+### 1.1 Concept and Purpose
+
+A **variable** is a named container in memory that holds a data value. Instead of scattering raw values throughout your program, you store them once under a name and refer to that name wherever needed. This makes programs easier to **manage, maintain, and reuse**.
+
+### 1.2 Practical Benefit: Update Once, Change Everywhere
+
+Consider a program that tells a short story *without* variables:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "There once was a man named George" << endl;
+    cout << "He was 70 years old" << endl;
+    cout << "He really liked the name George" << endl;
+    cout << "But didn't like being 70" << endl;
+    return 0;
+}
+```
+
+If the character should be named **Tom** and be **30**, you must edit the name and age in *four* places. Easy to miss one.
+
+Now with variables:
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string characterName = "Tom";
+    int characterAge = 30;
+
+    cout << "There once was a man named " << characterName << endl;
+    cout << "He was " << characterAge << " years old" << endl;
+    cout << "He really liked the name " << characterName << endl;
+    cout << "But didn't like being " << characterAge << endl;
+    return 0;
+}
+```
+
+Change the two values at the top and the **entire story updates automatically**.
+
+### 1.3 Variable Syntax and Rules
+
+```cpp
+string characterName = "Tom";
+//  ^        ^         ^   ^
+//  |        |         |   +-- 4. statement ends with a semicolon ;
+//  |        |         +------ 3. assignment operator (=) gives an initial value
+//  |        +---------------- 2. a descriptive name
+//  +------------------------- 1. data type comes first
+```
+
+| Step | Rule | Example |
+|------|------|---------|
+| 1 | Specify the **data type** first | `string`, `int` |
+| 2 | Give the variable a **descriptive name** | `characterAge`, not `x` |
+| 3 | Assign a value with the **assignment operator** `=` | `= 30` |
+| 4 | End every statement with a **semicolon** `;` | `;` |
+
+**Naming rules and conventions**
+
+- Names may contain letters, digits and underscores, and **cannot start with a digit**.
+- Names are **case-sensitive**: `age` and `Age` are different variables.
+- Names cannot be C++ keywords (`int`, `class`, `return`, ...).
+- Prefer descriptive names (`characterAge`) over cryptic ones (`ca`). Pick one style, `camelCase` or `snake_case`, and stay consistent.
+
+### 1.4 Declaration Options
+
+You can **declare and initialize on the same line**:
+
+```cpp
+int age = 30;
+```
+
+or **declare first, assign on a later line**:
+
+```cpp
+int age;     // declaration only
+age = 30;    // assignment
+```
+
+> **Warning:** A local variable that is declared but *not* assigned holds an **indeterminate (garbage) value**. Reading it is undefined behavior. Prefer initializing at declaration.
+
+Modern C++ also supports brace initialization, which rejects accidental narrowing conversions:
+
+```cpp
+int age{30};
+// int bad{3.7};   // compile error: narrowing conversion
+```
+
+### 1.5 Printing Variables
+
+Use `cout` with the **stream insertion operator** `<<` to chain text and variable values together:
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string name = "Tom";
+    int age = 30;
+
+    cout << "Name: " << name << ", Age: " << age << endl;
+    return 0;
+}
+```
+
+Output:
+
+```
+Name: Tom, Age: 30
+```
+
+Each `<<` pushes the next item onto the output stream, left to right. Text literals need quotes; variable names do **not**.
+
+### 1.6 Modifying Variables
+
+A variable's value can be **reassigned mid-execution**. Later lines see the new value; earlier output is unaffected.
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string characterName = "John";
+    int characterAge = 35;
+
+    cout << "There once was a man named " << characterName << endl;
+    cout << "He was " << characterAge << " years old" << endl;
+
+    characterName = "Mike";   // reassign
+    characterAge = 40;        // reassign
+
+    cout << "He really liked the name " << characterName << endl;
+    cout << "But didn't like being " << characterAge << endl;
+    return 0;
+}
+```
+
+Output:
+
+```
+There once was a man named John
+He was 35 years old
+He really liked the name Mike
+But didn't like being 40
+```
+
+Note that the **type is written only once**, at declaration. Reassignment uses just `name = value;`.
+
+---
+
+## 2. Data Types in C++
+
+### 2.1 Overview
+
+Every variable has a **data type** that tells the compiler what kind of information it holds and how much memory it needs. C++ provides several **primitive (fundamental) types**.
+
+| Category | Type | Stores | Literal example |
+|----------|------|--------|-----------------|
+| Text | `char` | A single character | `'A'` |
+| Text | `string` | A sequence of characters | `"Giraffe Academy"` |
+| Numeric | `int` | Whole numbers | `15`, `-5` |
+| Numeric | `float` | Decimal numbers (less precision) | `3.14f` |
+| Numeric | `double` | Decimal numbers (more precision) | `3.14159265` |
+| Boolean | `bool` | `true` or `false` | `true` |
+
+> **Technical note:** `string` is not a primitive type. It is a class in the standard library (`<string>`), but it is introduced alongside the primitives because beginners use it constantly.
+
+### 2.2 Text Types
+
+**`char`** holds exactly **one** character, enclosed in **single quotes** `''`:
+
+```cpp
+char grade = 'A';
+```
+
+**`string`** holds plain text of any length, enclosed in **double quotes** `""`. It requires `#include <string>`:
+
+```cpp
+string phrase = "Giraffe Academy";
+```
+
+Common mistake: mixing the quote styles.
+
+```cpp
+char  bad1 = "A";        // ERROR: double quotes make a string literal
+string bad2 = 'Giraffe'; // ERROR: single quotes are for one character only
+```
+
+### 2.3 Numeric Types
+
+**`int`** stores whole numbers, positive or negative. Write them **without quotes or decimal points**:
+
+```cpp
+int age = 15;
+int temperature = -5;
+```
+
+**`float` and `double`** store decimal (floating-point) numbers:
+
+```cpp
+float  piFloat  = 3.14159265358979f;
+double piDouble = 3.14159265358979;
+```
+
+| | `float` | `double` |
+|---|---------|----------|
+| Typical size | 4 bytes | 8 bytes |
+| Approx. decimal digits of precision | ~7 | ~15-16 |
+
+`double` stores **more decimal places** than `float`, so use **`double` by default**. Reach for `float` only when memory is tight (large arrays, GPU work).
+
+See the difference yourself:
+
+```cpp
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    float  f = 3.14159265358979f;
+    double d = 3.14159265358979;
+
+    cout << setprecision(15);
+    cout << "float : " << f << endl;   // digits drift after ~7 places
+    cout << "double: " << d << endl;   // accurate to ~15 places
+    return 0;
+}
+```
+
+> **Caution:** Integer division truncates. `7 / 2` is `3`, while `7.0 / 2` is `3.5`.
+
+### 2.4 Boolean Type
+
+**`bool`** holds one of two states, `true` or `false` (lowercase, no quotes):
+
+```cpp
+bool isStudent = true;
+bool isMale = false;
+```
+
+By default `cout` prints booleans as `1` and `0`. Use `boolalpha` for words:
+
+```cpp
+cout << isStudent << endl;                // 1
+cout << boolalpha << isStudent << endl;   // true
+```
+
+### 2.5 Literal Constants vs. Variables
+
+A value can be stored in a **named variable**, or written directly in a `cout` statement as a **literal constant**:
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    // Using variables
+    string name = "Giraffe Academy";
+    int years = 15;
+    cout << name << " has been teaching for " << years << " years" << endl;
+
+    // Using literal constants directly
+    cout << "Giraffe Academy" << " has been teaching for " << 15 << " years" << endl;
+    return 0;
+}
+```
+
+Both print the same line. The difference is **reuse and maintenance**: a literal must be edited everywhere it appears, a variable only once.
+
+### 2.6 All Types Together
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    char   grade     = 'A';
+    string course    = "Giraffe Academy";
+    int    students  = 15;
+    int    balance   = -5;
+    float  ratingF   = 4.5f;
+    double ratingD   = 4.567891234;
+    bool   isOpen    = true;
+
+    cout << boolalpha;
+    cout << "grade   : " << grade    << endl;
+    cout << "course  : " << course   << endl;
+    cout << "students: " << students << endl;
+    cout << "balance : " << balance  << endl;
+    cout << "ratingF : " << ratingF  << endl;
+    cout << "ratingD : " << ratingD  << endl;
+    cout << "isOpen  : " << isOpen   << endl;
+    return 0;
+}
+```
+
+---
+
+## 3. Working with Strings
+
+### 3.1 Printing Strings and Line Breaks
+
+Print a **string literal** with `cout`:
+
+```cpp
+cout << "Hello World";
+```
+
+Two ways to break a line:
+
+| Method | What it is | Example |
+|--------|-----------|---------|
+| `endl` | A stream manipulator: inserts a newline **and flushes** the output buffer | `cout << "Hello" << endl;` |
+| `\n` | An **escape character** embedded in the string: inserts a newline only | `cout << "Hello\n";` |
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Line one" << endl;
+    cout << "Line two\nLine three\n";
+    cout << "Line four\n" << "Line five" << endl;
+    return 0;
+}
+```
+
+Output:
+
+```
+Line one
+Line two
+Line three
+Line four
+Line five
+```
+
+**Difference in practice:** `\n` can sit *inside* a string, so one literal can produce several lines. `endl` is a separate item in the `<<` chain. Because `endl` also flushes the buffer, `\n` is slightly faster in output-heavy loops. For everyday programs the two are interchangeable.
+
+Other useful escape sequences: `\t` (tab), `\"` (double quote), `\\` (backslash).
+
+### 3.2 String Variables
+
+Store text in a `string` variable (needs `#include <string>`):
+
+```cpp
+string phrase = "Giraffe Academy";
+cout << phrase << endl;
+```
+
+### 3.3 Built-in String Functions and Methods
+
+Strings are objects, so functions are called with the **dot operator**: `variable.function()`.
+
+#### a) `length()`
+
+Returns the **total number of characters**, including spaces:
+
+```cpp
+string phrase = "Giraffe Academy";
+cout << phrase.length() << endl;   // 15
+```
+
+`size()` is an identical alias. The return type is `size_t` (an unsigned integer).
+
+#### b) String Indexing with `[]`
+
+Access an individual character with **0-based** index brackets. The **first** character is at index **0**:
+
+```cpp
+string phrase = "Giraffe Academy";
+
+cout << phrase[0] << endl;   // G   (1st character)
+cout << phrase[1] << endl;   // i   (2nd character)
+cout << phrase[8] << endl;   // A
+```
+
+| Index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 |
+|-------|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|
+| Char  | G | i | r | a | f | f | e |   | A | c | a  | d  | e  | m  | y  |
+
+The last valid index is `length() - 1`.
+
+> **Warning:** `[]` does **not** check bounds. `phrase[100]` is undefined behavior. Use `phrase.at(100)` instead to get a safe `std::out_of_range` exception.
+
+#### c) Character Modification
+
+Because `phrase[i]` refers to a single `char`, you can **assign a new `char` value** (single quotes) to that position:
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string phrase = "Giraffe Academy";
+
+    phrase[0] = 'B';
+    cout << phrase << endl;   // Biraffe Academy
+    return 0;
+}
+```
+
+Only that one position changes. The rest of the string is untouched.
+
+### 3.4 Full Example
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string phrase = "Giraffe Academy";
+
+    cout << "Phrase: " << phrase << "\n";
+    cout << "Length: " << phrase.length() << "\n";
+    cout << "First character: " << phrase[0] << "\n";
+
+    phrase[0] = 'B';
+    cout << "After modification: " << phrase << endl;
+    return 0;
+}
+```
+
+Output:
+
+```
+Phrase: Giraffe Academy
+Length: 15
+First character: G
+After modification: Biraffe Academy
+```
+
+---
+
+## 4. Practice Exercises
+
+1. **Story Template.** Write a short story using at least three variables (a `string` name, an `int` age, a `string` city). Print each variable at least twice, then change only the declarations and re-run.
+2. **Reassignment.** Declare `int score = 10;`, print it, reassign it to `25`, and print again. Then try declaring first (`int score;`) and assigning on the next line.
+3. **Type Tour.** Declare one variable of each type (`char`, `string`, `int`, `float`, `double`, `bool`) and print them with labels.
+4. **Precision Test.** Store `1.123456789123456789` in a `float` and a `double`. Print both with `setprecision(18)`. What do you observe?
+5. **Quote Errors.** Deliberately write `char c = "A";` and `string s = 'ABC';`. Read the compiler errors and explain them in your own words.
+6. **Newlines.** Print three lines using only one `cout <<` statement and `\n`. Then repeat using `endl`.
+7. **String Surgery.** Given `string word = "Giraffe";`, print its length, its first and last characters (use `length() - 1`), then change the first character to `'R'` and print the result.
+8. **Bounds.** Compare `word[50]` with `word.at(50)`. Which is safer and why?
+
+## Summary
+
+| Concept | Key takeaway |
+|---------|--------------|
+| Variable | Named memory container: `type name = value;` |
+| Reassignment | `name = newValue;` (no type needed) |
+| Output | Chain items with `<<`; variables need no quotes |
+| `char` vs `string` | `'A'` single quotes vs `"text"` double quotes |
+| `int` | Whole numbers only |
+| `float` vs `double` | `double` is more precise; use it by default |
+| `bool` | `true` / `false` (prints as `1` / `0`) |
+| `endl` vs `\n` | Both break lines; `endl` also flushes |
+| `length()` | Number of characters |
+| `str[i]` | 0-based character access; assignable with a `char` |
