@@ -38,13 +38,14 @@ using namespace std;
 
 int main() //main()
 {
-    int a, b, sum;
+    double a, b, sum;
+    printf("Hello, World!");    // print output info <-- >> <--
     cout << " Enter value of first variable :  ";
     cin >> a;
     cout << "Enter value of 2nd variable : ";
     cin >> b;
 
-    sum = a + b;
+    sum = (5/100.0)*b;
 
     // print('the sum of both values are : ', sum)
     cout << "The sum value is : "<< sum;    // << a+b;
