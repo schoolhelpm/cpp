@@ -26,7 +26,8 @@ int main()
     // for (inilize value ; conditional statement; incremental counter)    
     // for (int i = 0; i <= 10; i++)
 
-    for (int i=0; i<=5; i++)
+    int i;
+    for (i=0; i<=5; i++)
     {
         cout << i << endl;
     }
