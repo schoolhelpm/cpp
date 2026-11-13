@@ -26,6 +26,10 @@ int *p = nullptr;   // safe: no address, not garbage
 
 ---
 
+![Reference vs Pointer](img/ref_vs_pointer.png)
+
+---
+
 ## 2. Declaration Validity & Dereference Tracing
 
 Common declaration forms:
