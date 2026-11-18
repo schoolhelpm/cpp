@@ -2,6 +2,7 @@
 
 > Maps to **Syllabus Unit 3** (DU B.Sc. CS — Programming Using C++)
 
+[Link to PPT](https://docs.google.com/presentation/d/11qj6-42zHKsO05PiHpZFmed1bpKnp4Y_C_JbkgFfRto/present)
 ---
 
 ## Table of Contents
