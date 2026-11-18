@@ -2,7 +2,7 @@
 
 ## 1. Pointer Basics
 
-A pointer is a variable that stores the **address** of another variable.
+**Def :** A pointer is a variable that stores the **address** of another variable.
 
 ```cpp
 int x = 10;

@@ -1,12 +1,12 @@
-// declare pointer
+// update array value by 5
 
 #include <iostream>
 using namespace std;
 
 int main(){
-    int x = 10;
-    int *p = &x;   // p stores address of x
-    cout << p << endl;     // prints address
-    cout << *p << endl;    // dereference: prints value at that address -> 10
+    int a;
+    int *ptr=nullptr;       // ptr <--- no value // null >> grabage
+    cout<< *ptr <<" "<< ptr<< endl;
+
     return 0;
 }
